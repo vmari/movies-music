@@ -1,0 +1,36 @@
+version: '3.1'
+services:
+    db:
+        image: postgres:10-alpine
+        ports:
+            - ${POSTGRES_PORT}:${POSTGRES_PORT}
+        expose:
+            - ${POSTGRES_PORT}
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            POSTGRES_DB: ${POSTGRES_DB}
+    api:
+        depends_on:
+            - db
+        build:
+            context: movies-music-back
+            dockerfile: Dockerfile
+        links:
+            - db
+        ports:
+            - 3000:3000
+        volumes:
+            - "./movies-music-back/src:/app/src"
+            - "./movies-music-back/dist:/app/dist"
+            - "./movies-music-back/package.json:/app/package.json"
+    front:
+        depends_on:
+            - api
+        build:
+            context: movies-music-front
+            dockerfile: Dockerfile
+        ports:
+            - 8080:8080
+        volumes:
+            - "./movies-music-front:/app/:rw"

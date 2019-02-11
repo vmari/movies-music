@@ -1,0 +1,10 @@
+export const PURGE_AUTH = "logOut";
+export const SET_AUTH = "setUser";
+export const SET_TRACKS = "setTracks";
+export const SET_FILM = "setFilm";
+export const SET_SONGS = "setSongs";
+export const SET_SONG = "setSong";
+export const SET_ERROR = "setError";
+export const ADD_SONG = "addSong";
+export const ADD_TRACK = "addTrack";
+export const RESET_STATE = "resetModuleState";
